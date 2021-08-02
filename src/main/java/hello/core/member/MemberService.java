@@ -5,9 +5,18 @@ package hello.core.member;
  */
 public interface MemberService {
 
-    // 회원 가입
+    /**
+     * 회원 가입
+     *
+     * @param member
+     */
     void join(Member member);
 
-    // 회원 조회
+    /**
+     * 회원 조회
+     *
+     * @param memberId
+     * @return
+     */
     Member findMember(Long memberId);
 }
