@@ -1,15 +1,22 @@
 package hello.core.member;
 
+import hello.core.AppConfig;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
- * 회원 도메인 설계의 문제점
- * : 의존관계가 인터페이스 뿐만 아니라 구현까지 모두 의존하는 문제점 ( DIP 위반 )
- */
 public class MemberServiceTest {
 
-    MemberService memberService = new MemberServiceImpl();
+    MemberService memberService;
+
+    /**
+     * @BeforeEach : 각 테스트를 실행하기 전에 호출됨.
+     */
+    @BeforeEach
+    public void beforeEach() {
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+    }
 
     @Test
     void join() {
