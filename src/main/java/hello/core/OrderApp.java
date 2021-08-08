@@ -26,7 +26,7 @@ public class OrderApp {
         memberService.join(member);
 
         // 주문 생성
-        Order order = orderService.createOrder(memberId, "itemA", 10000);
+        Order order = orderService.createOrder(memberId, "itemA", 20000);
 
         // 생성된 주문 확인하여 할인 금액 조회
         System.out.println("order = " + order);
