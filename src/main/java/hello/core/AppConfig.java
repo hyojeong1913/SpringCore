@@ -9,6 +9,8 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 구현 객체를 생성하고, 연결하는 책임을 가지는 별도의 설정 클래스
@@ -19,7 +21,11 @@ import hello.core.order.OrderServiceImpl;
  * 생성한 객체 인스턴스의 참조(레퍼런스)를 생성자를 통해서 주입(연결)
  *
  * => AppConfig 의 등장으로 애플리케이션이 크게 사용 영역과, 객체를 생성하고 구성 (Configuration) 하는 영역으로 분리되었다.
+ *
+ * @Configuration : AppConfig에 설정을 구성한다는 뜻의 어노테이션
+ * @Bean : 각 메서드에 붙여주면 스프링 컨테이너에 스프링 빈으로 등록된다.
  */
+@Configuration
 public class AppConfig {
 
     /**
@@ -27,6 +33,7 @@ public class AppConfig {
      *
      * @return
      */
+    @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
@@ -36,6 +43,7 @@ public class AppConfig {
      *
      * @return
      */
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
@@ -47,7 +55,8 @@ public class AppConfig {
      * 장점 : MemoryMemberRepository 를 다른 구현체로 변경할 때 한 부분만 변경하면 된다.
      * @return
      */
-    private MemberRepository memberRepository() {
+    @Bean
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
@@ -58,6 +67,7 @@ public class AppConfig {
      * 장점 : FixDiscountPolicy 를 다른 구현체로 변경할 때 한 부분만 변경하면 된다.
      * @return
      */
+    @Bean
     public DiscountPolicy discountPolicy() {
         // 정액 할인 정책을 정률% 할인 정책으로 변경
 //        return new FixDiscountPolicy();
