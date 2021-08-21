@@ -35,6 +35,10 @@ public class AppConfig {
      */
     @Bean
     public MemberService memberService() {
+
+        // memberService() 호출 로그
+        System.out.println("call AppConfig.memberService");
+
         return new MemberServiceImpl(memberRepository());
     }
 
@@ -45,6 +49,10 @@ public class AppConfig {
      */
     @Bean
     public OrderService orderService() {
+
+        // orderService() 호출 로그
+        System.out.println("call AppConfig.orderService");
+
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
@@ -57,6 +65,10 @@ public class AppConfig {
      */
     @Bean
     public MemberRepository memberRepository() {
+
+        // memberRepository() 호출 로그
+        System.out.println("call AppConfig.memberRepository");
+
         return new MemoryMemberRepository();
     }
 
@@ -65,6 +77,7 @@ public class AppConfig {
      *
      * new FixDiscountPolicy() 부분 중복 제거
      * 장점 : FixDiscountPolicy 를 다른 구현체로 변경할 때 한 부분만 변경하면 된다.
+     * 
      * @return
      */
     @Bean

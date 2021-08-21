@@ -27,4 +27,13 @@ public class MemberServiceImpl implements MemberService {
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId);
     }
+
+    /**
+     * 스프링 컨테이너가 싱글톤의 문제점을 해결하는지 검증 테스트 용도
+     *
+     * @return
+     */
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
 }

@@ -35,4 +35,13 @@ public class OrderServiceImpl implements OrderService {
         // 주문 객체를 생성해서 반환
         return new Order(memberId, itemName, itemPrice, discountPrice);
     }
+
+    /**
+     * 스프링 컨테이너가 싱글톤의 문제점을 해결하는지 검증 테스트 용도
+     *
+     * @return
+     */
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
 }
