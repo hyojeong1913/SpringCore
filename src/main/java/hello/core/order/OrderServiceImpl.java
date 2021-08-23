@@ -3,6 +3,7 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import org.springframework.stereotype.Component;
 
 /**
  * 주문 서비스 구현체
@@ -11,13 +12,24 @@ import hello.core.member.MemberRepository;
  * 생성자를 통해 어떤 구현 객체가 주입될지는 알 수 없다.
  *
  * OrderServiceImpl 은 DiscountPolicy 인터페이스만 의존
+ *
+ * @Component 어노테이션 : 스프링 빈으로 등록
  */
+@Component
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
-    // 생성자
+    /**
+     * 생성자
+     *
+     * @Autowired 어노테이션 : 의존관계를 자동으로 주입
+     * => 생성자에서 여러 의존관계도 한 번에 주입받을 수 있다.
+     *
+     * @param memberRepository
+     * @param discountPolicy
+     */
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
