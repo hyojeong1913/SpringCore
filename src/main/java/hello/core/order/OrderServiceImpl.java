@@ -3,6 +3,7 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,8 +15,13 @@ import org.springframework.stereotype.Component;
  * OrderServiceImpl 은 DiscountPolicy 인터페이스만 의존
  *
  * @Component 어노테이션 : 스프링 빈으로 등록
+ *
+ * @RequiredArgsConstructor 어노테이션
+ * : lombok 라이브러리가 제공하는 기능으로 final 이 붙은 필드들을 모아서 생성자를 자동으로 만들어준다.
+ * = lombok 이 java 의 어노테이션 프로세서 라는 기능을 이용해서 컴파일 시점에 생성자 코드를 자동으로 생성해준다.
  */
 @Component
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
@@ -30,10 +36,10 @@ public class OrderServiceImpl implements OrderService {
      * @param memberRepository
      * @param discountPolicy
      */
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
