@@ -45,7 +45,7 @@ public class AutowiredTest {
          */
         @Autowired
         public void setNoBean2(@Nullable Member noBean2) {
-            System.out.println("noBean1 = " + noBean2);
+            System.out.println("noBean2 = " + noBean2);
         }
 
         /**
@@ -55,7 +55,7 @@ public class AutowiredTest {
          */
         @Autowired
         public void setNoBean3(Optional<Member> noBean3) {
-            System.out.println("noBean1 = " + noBean3);
+            System.out.println("noBean3 = " + noBean3);
         }
     }
 }
