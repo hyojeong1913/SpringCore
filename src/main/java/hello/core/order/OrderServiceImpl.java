@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -54,12 +55,13 @@ public class OrderServiceImpl implements OrderService {
      *  : @Primary 는 기본값 처럼 동작하는 것이고, @Qualifier 는 매우 상세하게 동작
      *  : 스프링은 자동보다는 수동이, 넒은 범위의 선택권 보다는 좁은 범위의 선택권이 우선 순위가 높으므로 @Qualifier 가 우선권이 높다.
      *
+     * 직접 만든 어노테이션 @MainDiscountPolicy 사용
+     *
      * @param memberRepository
      * @param discountPolicy
      */
     @Autowired
-//    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) { // Qualifier 사용
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) { // Primary 사용
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
