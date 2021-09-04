@@ -1,5 +1,8 @@
 package hello.core.lifecycle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 /**
  * 데이터베이스 커넥션 풀이나 네트워크 소켓처럼 애플리케이션 시작 시점에 필요한 연결을 미리 해두고,
  * 애플리케이션 종료 시점에 연결을 모두 종료하는 작업을 진행하려면, 객체의 초기화와 종료 작업이 필요하다.
@@ -20,6 +23,13 @@ package hello.core.lifecycle;
  * - 메서드 이름을 자유롭게 줄 수 있다.
  * - 스프링 빈이 스프링 코드에 의존하지 않는다.
  * - 코드가 아니라 설정 정보를 사용하기 때문에 코드를 고칠 수 없는 외부 라이브러리에도 초기화, 종료 메서드를 적용할 수 있다.
+ *
+ * @PostConstruct, @PreDestory 애노테이션 특징
+ * - 최신 스프링에서 가장 권장하는 방법
+ * - 스프링에 종속적인 기술이 아니라 JSR-250 라는 자바 표준이므로 스프링이 아닌 다른 컨테이너에서도 동작한다.
+ * - 유일한 단점은 외부 라이브러리에는 적용하지 못한다는 점이 있다.
+ *   => 외부 라이브러리를 초기화, 종료 해야 하면 @Bean 의 기능을 사용
+ *   => 코드를 고칠 수 없는 외부 라이브러리를 초기화, 종료해야 하면 @Bean 의 initMethod , destroyMethod 를 사용 권장
  */
 public class NetworkClient {
 
@@ -57,6 +67,7 @@ public class NetworkClient {
      *
      * @throws Exception
      */
+    @PostConstruct
     public void init() {
 
         System.out.println("NetworkClient.init");
@@ -71,6 +82,7 @@ public class NetworkClient {
      *
      * @throws Exception
      */
+    @PreDestroy
     public void close() {
 
         System.out.println("NetworkClient.close");

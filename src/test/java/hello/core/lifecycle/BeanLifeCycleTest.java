@@ -73,7 +73,7 @@ public class BeanLifeCycleTest {
          *
          * @return
          */
-        @Bean(initMethod = "init", destroyMethod = "close")
+        @Bean
         public NetworkClient networkClient() {
 
             NetworkClient networkClient = new NetworkClient();
