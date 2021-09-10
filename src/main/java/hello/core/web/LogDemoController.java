@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
  *
  * ObjectProvider.getObject() 를 LogDemoController, LogDemoService 에서 각각 한번씩 따로 호출해도
  * 같은 HTTP 요청이면 같은 스프링 빈이 반환된다.
+ *
+ * CGLIB 라는 라이브러리로 내 클래스를 상속 받은 가짜 프록시 객체를 만들어서 주입한다.
  */
 @Controller
 @RequiredArgsConstructor
@@ -26,7 +28,7 @@ public class LogDemoController {
     private final LogDemoService logDemoService;
 
     // ObjectProvider 덕분에 ObjectProvider.getObject() 를 호출하는 시점까지 request scope 빈의 생성을 지연
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger;
 
     /**
      * HttpServletRequest 를 통해서 요청 URL 을 받는다.
@@ -47,10 +49,6 @@ public class LogDemoController {
 
         // 받은 requestURL 값을 myLogger 에 저장
         String requestURL = request.getRequestURI().toString();
-
-        // ObjectProvider.getObject() 를 호출하시는 시점에는
-        // HTTP 요청이 진행중이므로 request scope 빈의 생성이 정상 처리된다.
-        MyLogger myLogger = myLoggerProvider.getObject();
 
         myLogger.setRequestURL(requestURL);
 

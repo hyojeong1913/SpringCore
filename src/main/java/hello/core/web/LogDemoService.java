@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LogDemoService {
 
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger;
 
     /**
      * 서비스 계층은 웹 기술에 종속되지 않고, 가급적 순수하게 유지하는 것이 유지보수 관점에서 좋다.
@@ -26,9 +26,6 @@ public class LogDemoService {
      * @param id
      */
     public void logic(String id) {
-
-        MyLogger myLogger = myLoggerProvider.getObject();
-
         myLogger.log("service id = " + id);
     }
 }
